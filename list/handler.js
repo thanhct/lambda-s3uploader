@@ -1,16 +1,18 @@
 'use strict';
 const aws = require('aws-sdk');
 const s3 = new aws.S3();
-const AWS_URL = 'http://thanhct-laravel.s3.amazonaws.com/';
+const LIST_BUCKET = process.env.LIST_BUCKET;
+const AWS_URL = 'http://' + LIST_BUCKET + '.s3.amazonaws.com/';
+
 
 module.exports.listS3 = async (event, context, uploadCallback) => {
   var params = {
-    Bucket: 'thanhct-laravel', /* required */
+    Bucket: LIST_BUCKET, /* required */
     // Delimiter: 'STRING_VALUE',
     // EncodingType: url,
     // Marker: 'STRING_VALUE',
     MaxKeys: 20,
-    // Prefix: 'STRING_VALUE',
+    Prefix: 'files',
     // RequestPayer: requester
   };
 
