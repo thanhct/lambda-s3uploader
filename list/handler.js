@@ -1,17 +1,17 @@
 'use strict';
 const aws = require('aws-sdk');
 const s3 = new aws.S3();
-const LIST_BUCKET = process.env.LIST_BUCKET;
-const AWS_URL = 'http://' + LIST_BUCKET + '.s3.amazonaws.com/';
-
+const AWS_URL = 'http://thanhct-laravel.s3.amazonaws.com/';
 
 module.exports.listS3 = async (event, context, uploadCallback) => {
+  console.log(event);
+  var MaxKeys = event.queryStringParameters.max_keys || 20;
   var params = {
-    Bucket: LIST_BUCKET, /* required */
+    Bucket: 'thanhct-laravel', /* required */
     // Delimiter: 'STRING_VALUE',
     // EncodingType: url,
     // Marker: 'STRING_VALUE',
-    MaxKeys: 20,
+    MaxKeys: MaxKeys,
     Prefix: 'files',
     // RequestPayer: requester
   };
@@ -34,12 +34,10 @@ function listObject(event, context, params, uploadCallback) {
          return reject(err);
        } else {
          var contents = data.Contents;
-         console.log(data.Contents);           // successful response
          contents.forEach((element, index) => {
            var objectUrl = AWS_URL + element.Key;
            listUrl.push(objectUrl);
          })
-         console.log('listUrl', JSON.stringify(listUrl));
          resolve(listUrl);
       };
     });
