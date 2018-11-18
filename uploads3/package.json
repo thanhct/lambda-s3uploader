@@ -1,0 +1,31 @@
+{
+  "name": "uploadS3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "uploads3/uploader.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thanhct/lambda-s3uploader.git"
+  },
+  "keywords": [
+    "lambda",
+    "serverless",
+    "upload s3 with lambda function",
+    "s3 uploader"
+  ],
+  "author": "thanhct <caothanhthanh@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thanhct/lambda-s3uploader/issues/issues"
+  },
+  "homepage": "",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-jshint": "^2.1.0",
+    "gulp-zip": "^4.1.0",
+    "jshint": "^2.9.5"
+  },
+  "dependencies": {
+    "mime-types": "^2.1.17"
+  }
+}
