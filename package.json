@@ -4,7 +4,7 @@
   "description": "",
   "main": "uploads3/uploader.js",
   "scripts": {
-    "deploy": "LIST_BUCKET=thanhct-laravel serverless deploy -p ../"
+    "deploy.list": "LIST_BUCKET=thanhct-laravel serverless deploy"
   },
   "repository": {
     "type": "git",
@@ -27,8 +27,5 @@
     "gulp-jshint": "^2.1.0",
     "gulp-zip": "^4.1.0",
     "jshint": "^2.9.5"
-  },
-  "dependencies": {
-    "mime-types": "^2.1.17"
   }
 }
