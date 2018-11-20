@@ -4,7 +4,8 @@
   "description": "",
   "main": "uploads3/uploader.js",
   "scripts": {
-    "deploy.list": "LIST_BUCKET=thanhct-laravel serverless deploy"
+    "deploy.list": "LIST_BUCKET=thanhct-laravel serverless deploy",
+    "local.listS3": "LIST_BUCKET=thanhct-laravel serverless invoke local -v --function listS3"
   },
   "repository": {
     "type": "git",
