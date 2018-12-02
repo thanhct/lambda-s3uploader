@@ -6,7 +6,7 @@ const mime = require('mime-types');
 const path = require('path');
 const STORE_BUCKET = process.env.STORE_BUCKET;
 
-exports.handler = async (event) => {
+exports.handler = async (event) => (
     console.log(event);
     // parse body to json
     let bodyJson = JSON.parse(event.body);
@@ -32,7 +32,7 @@ exports.handler = async (event) => {
         "isBase64Encoded": false
     };
     return response;
-};
+);
 
 function putS3(params) {
     return new Promise((resolve, reject) => {

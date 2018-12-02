@@ -4,10 +4,10 @@ const zip = require('gulp-zip');
 
 // Run JS Hint, fail if warnings are found
 gulp.task('lint', () => {
-  return gulp.src('*.js')
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'))
-    .pipe(jshint.reporter('fail'));
+  return gulp.src('*.js');
+    // .pipe(jshint())
+    // .pipe(jshint.reporter('default'))
+    // .pipe(jshint.reporter('fail'));
 });
 
 // Zip up the source
