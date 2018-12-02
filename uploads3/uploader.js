@@ -1,21 +1,48 @@
 'use strict';
-const aws = require('aws-sdk');
+const AWS = require('aws-sdk');
+const s3 = new AWS.S3();
 const fs = require('fs');
 const mime = require('mime-types');
 const path = require('path');
-const s3 = new aws.S3();
+const STORE_BUCKET = process.env.STORE_BUCKET;
 
-const destBucket = 'thanhct-laravel';
+exports.handler = async (event) => {
+    console.log(event);
+    let bodyJson = JSON.parse(event.body);
+    let imageData = Buffer.from(bodyJson.file.replace(/^data:image\/\w+;base64,/, ""), 'base64');
 
-module.exports.uploads3 = async (event, context) => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: 'upload',
-      input: event,
-    }),
-  };
+    let params = {
+        Body: imageData,
+        Bucket: STORE_BUCKET,
+        Key: bodyJson.fileName,
+        ACL: 'private'
+    };
 
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
+    let data = await putS3(params);
+    // TODO implement
+    const response = {
+        "headers": {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin':'*'
+
+        },
+        "statusCode": 200,
+        "body": JSON.stringify(data),
+        "isBase64Encoded": false
+    };
+    return response;
 };
+
+function putS3(params) {
+    return new Promise((resolve, reject) => {
+        s3.putObject(params, (error, data) => {
+            if (data) {
+                resolve(data);
+            } else {
+                reject(error);
+            }
+
+        })
+
+    })
+}

@@ -4,7 +4,11 @@
   "description": "",
   "main": "uploads3/uploader.js",
   "scripts": {
-    "deploy": "LIST_BUCKET=thanhct-laravel serverless deploy -p ../"
+    "deploy": "STORE_BUCKET=thanhct-laravel serverless deploy",
+    "build": "node_modules/gulp/bin/gulp.js",
+    "sam.package": "aws cloudformation package --template-file deploy.yml --output-template-file packaged-deploy.yml --s3-bucket thanhct-laravel",
+    "sam.deploy": "aws cloudformation deploy --template-file packaged-deploy.yml --capabilities CAPABILITY_IAM --stack-name thanhct-uploads3-stack --parameter-overrides destBucket=shipnhanh-test"
+
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,42 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Serverless web application for uploading files to S3
+Parameters:
+  destBucket:
+    Description: Name of the S3 Bucket to put uploaded files into (must exist prior
+      to deployment)
+    Type: String
+Resources:
+  uploaderThanhct:
+    Properties:
+      CodeUri: s3://thanhct-laravel/e97e38d8f94fb6c77aa7adf707ec9aef
+      Description: Serverless web application for uploading files to S3
+      Environment:
+        Variables:
+          DEST_BUCKET:
+            Ref: destBucket
+      Events:
+        getProxy:
+          Properties:
+            Method: get
+            Path: /{proxy+}
+          Type: Api
+        postProxy:
+          Properties:
+            Method: post
+            Path: /{proxy+}
+          Type: Api
+        root:
+          Properties:
+            Method: get
+            Path: /
+          Type: Api
+      Handler: uploader.handler
+      MemorySize: 128
+      Policies:
+      - S3CrudPolicy:
+          BucketName:
+            Ref: destBucket
+      Runtime: nodejs8.10
+      Timeout: 60
+    Type: AWS::Serverless::Function
+Transform: AWS::Serverless-2016-10-31
