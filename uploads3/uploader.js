@@ -8,6 +8,7 @@ const STORE_BUCKET = process.env.STORE_BUCKET;
 
 exports.handler = async (event) => {
     console.log(event);
+    // parse body to json
     let bodyJson = JSON.parse(event.body);
     let imageData = Buffer.from(bodyJson.file.replace(/^data:image\/\w+;base64,/, ""), 'base64');
 

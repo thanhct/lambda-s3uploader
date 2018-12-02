@@ -4,6 +4,7 @@
   "description": "",
   "main": "uploads3/uploader.js",
   "scripts": {
+    "git.master": "git push origin master",
     "deploy": "STORE_BUCKET=thanhct-laravel serverless deploy",
     "build": "node_modules/gulp/bin/gulp.js",
     "sam.package": "aws cloudformation package --template-file deploy.yml --output-template-file packaged-deploy.yml --s3-bucket thanhct-laravel",
